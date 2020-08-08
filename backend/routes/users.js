@@ -13,7 +13,6 @@ router.route('/')
     const email = req.body.email;
     const phone = Number(req.body.phone);
     const DOB = Date.parse(req.body.DOB);
-
     const newUser = new User({
         name,
         gender,
@@ -26,4 +25,16 @@ router.route('/')
     .then(() => res.json('New User Added!'))
     .catch(err => res.status(400).json('Error'+err));
 })
+
+router.route('/search')
+.post((req,res) => {
+    const query = req.body.query;
+    console.log(query);
+    User.find({name:query})
+    .then(user => {
+        res.json({user})
+    })
+    .catch(err => console.log(err))
+})
+
 module.exports = router;
