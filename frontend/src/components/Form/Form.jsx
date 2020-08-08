@@ -2,6 +2,7 @@ import React,{ useState } from 'react'
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
+import styles from './Form.module.css';
 
 const Form = () => {
     const [name,setName] =useState("");
@@ -17,28 +18,48 @@ const Form = () => {
         }
         else{
             axios.post('http://localhost:5000/users/',formObject)
-            .then(res => console.log(res.data))
+            .then(res => alert(res.data))
+            setName("");
+            setEmail("");
+            setPhone(0);
+            setDOB("");
         }
     }
     return (
-        <div>
+        <div className={styles.container}>
+            <h1>Enter User Details To Add To Our User Database</h1>
+            <br/>
+            <div className={styles.center}>
             <form onSubmit={onSubmit}>
                 <label>Name</label>
-                <input type="text" name="name" onChange={e => setName(e.target.value)}/>
+                <br/>
+                <input className={styles.text} type="text" name="name" value={name} onChange={e => setName(e.target.value)}/>
+                <br/>
+                <label>Email</label>
+                <br/>
+                <input className={styles.text} type="text" name="email"  value={email} onChange={e => setEmail(e.target.value)}/>
+                <br/>
                 <label>Gender</label>
+                <br/>
                 <label>Male</label>
                 <input type="radio" name="gender" id="male" value="male" onChange={e => setGender(e.target.value)}/>
                 <label>Female</label>
                 <input type="radio" name="gender" id="female" value="female" onChange={e => setGender(e.target.value)}/>
-                <label>Email</label>
-                <input type="text" name="email" onChange={e => setEmail(e.target.value)}/>
+                <br/>
+                <br/>
                 <label>Phone Number</label>
-                <input type="number" name="pnum"onChange={e => setPhone(e.target.value)}/>
+                <br/>
+                <input className={styles.text} value ={phone} type="number" name="pnum"onChange={e => setPhone(e.target.value)}/>
+                <br/>
                 <label>Date of Birth</label>
-                <DatePicker selected={DOB} onChange={date => setDOB(date)}/>
+                <br/>
+                <DatePicker className={styles.text} selected={DOB} onChange={date => setDOB(date)}/>
+                <br/>
                 <label>Image</label>
+                <br/>
                 <button>Submit</button>
             </form>
+            </div>          
         </div>
     )
 }
