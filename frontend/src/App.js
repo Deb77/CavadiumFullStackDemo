@@ -13,7 +13,14 @@ function App() {
   return (
     <Router>
       <div className="container">
-      <div className="right"></div>
+      <div className="right">
+      <img src="https://img.icons8.com/cotton/64/000000/conference-call.png" alt="logo"/>
+        <h1>Users Log</h1>
+        <br/>
+        <li><img src="https://img.icons8.com/pastel-glyph/24/000000/plus.png" alt="plus"/><Link className="links" to="/">AddUser</Link></li>
+        <br/>
+          <li><img src="https://img.icons8.com/ios-glyphs/30/000000/contacts.png" alt="users"/><Link className="links" to="/users">ViewUsers</Link></li>
+      </div>
       <div className="left">
         <Switch>
           <Route exact path="/">
@@ -23,10 +30,6 @@ function App() {
             <Users/>
           </Route>
         </Switch>     
-        <div className="footer">
-          <li><Link to="/">AddUser</Link></li>
-          <li><Link to="/users">ViewUsers</Link></li>
-        </div>
       </div>
     </div>
     </Router>

@@ -13,12 +13,14 @@ router.route('/')
     const email = req.body.email;
     const phone = Number(req.body.phone);
     const DOB = Date.parse(req.body.DOB);
+    const age = Date().slice(11,15)-req.body.DOB.slice(0,4)
     const newUser = new User({
         name,
         gender,
         email,
         phone,
-        DOB
+        DOB,
+        age
     });
 
     newUser.save()
@@ -30,11 +32,21 @@ router.route('/search')
 .post((req,res) => {
     const query = req.body.query;
     console.log(query);
-    User.find({name:query})
+    User.find({"name":query})
     .then(user => {
         res.json({user})
     })
     .catch(err => console.log(err))
+})
+
+router.route('/filter')
+.post((req,res) => {
+    const query = req.body;
+    User.find({"age":query})
+    .then(user => {
+        res.json({user})
+    })
+    .catch(err => console.log(err));
 })
 
 module.exports = router;

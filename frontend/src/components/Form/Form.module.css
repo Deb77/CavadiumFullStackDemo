@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap');
 .container{
-    background-color:rgba(247, 177, 171,0.9);
     padding:50px;
     font-family: Montserrat;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color:rgba(247, 177, 171,0.6);
+    height:100vh;
 }
 
 .text{
