@@ -14,13 +14,16 @@ router.route('/')
     const phone = Number(req.body.phone);
     const DOB = Date.parse(req.body.DOB);
     const age = Date().slice(11,15)-req.body.DOB.slice(0,4)
+    const image = req.body.pass;
+    console.log(req.body);
     const newUser = new User({
         name,
         gender,
         email,
         phone,
         DOB,
-        age
+        age,
+        image
     });
 
     newUser.save()

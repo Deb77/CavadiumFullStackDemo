@@ -10,9 +10,40 @@ const Form = () => {
     const [email,setEmail] = useState("");
     const [phone,setPhone] = useState(0);
     const [DOB,setDOB] = useState("");
-    const formObject = {name,gender,email,phone,DOB}
-    let onSubmit = (e) => {
+    const [file,setFile] = useState('');
+    const [filename,setFilename] = useState('Choose File');
+    const [uploaded,setUploaded] = useState({});
+    const [pass,setPass] = useState('');
+
+    const onChange = e => {
+        setFile(e.target.files[0]);
+        setFilename(e.target.files[0].name);
+        setPass('/uploads/'+e.target.files[0].name);
+    }
+
+    const formObject = {name,gender,email,phone,DOB,pass}
+    let onSubmit = async (e) => {
         e.preventDefault();
+        const formData = new FormData();
+            formData.append('file',file);
+
+            try{
+                const res = await axios.post('http://localhost:5000/upload',formData,{
+                    headers:{
+                        'Content-Type':'multipart/form-data'
+                    }
+                });
+                const {fileName,filePath} = res.data;
+                setUploaded({fileName,filePath})
+
+            }catch(err){
+                if(err.response.status === 500){
+                    console.log('There was a problem with the server');
+                }else{
+                    console.log(err.response.data.msg);
+                }
+            }
+
         if(name===""|| gender===""||email===""||phone===0||DOB===""){
             alert("Please do not keep any field empty")
         }
@@ -30,7 +61,7 @@ const Form = () => {
             <h1>Enter User Details To Add To Our User Database</h1>
             <br/>
             <div className={styles.center}>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} encType="multipart/form-data">
                 <label>Name</label>
                 <br/>
                 <input className={styles.text} type="text" name="name" value={name} onChange={e => setName(e.target.value)}/>
@@ -55,10 +86,16 @@ const Form = () => {
                 <br/>
                 <DatePicker className={styles.text} selected={DOB} onChange={date => setDOB(date)}/>
                 <br/>
-                <label>Image</label>
+                <label>Image({filename})</label>
                 <br/>
+                <input type="file" onChange={onChange}/>
                 <button>Submit</button>
             </form>
+            {uploaded?(
+                <div>
+                    <img style={{width:'100px',height:'100px'}} src={uploaded.filePath} alt=""/>
+                </div>
+            ):null}
             </div>          
         </div>
     )

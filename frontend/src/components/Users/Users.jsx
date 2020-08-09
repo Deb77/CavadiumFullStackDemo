@@ -66,7 +66,7 @@ const Users = () => {
                     <h3>Search Results</h3>
                     <div className={styles.cardcon}>
                     {data.map((user,k) => (
-                        <Card key={k} name={user.name} email={user.email} gender={user.gender} DOB={user.DOB.slice(0,10)}/>
+                        <Card key={k} image={user.image} name={user.name} email={user.email} gender={user.gender} DOB={user.DOB.slice(0,10)}/>
                     ))}
                     </div>
                 </div>
@@ -76,7 +76,7 @@ const Users = () => {
                     <h3>Filter Results</h3>
                     <div className={styles.cardcon}>
                     {filter.map((user,k) => (
-                        <Card key={k} name={user.name} email={user.email} gender={user.gender} DOB={user.DOB.slice(0,10)}/>
+                        <Card key={k} image={user.image} name={user.name} email={user.email} gender={user.gender} DOB={user.DOB.slice(0,10)}/>
                     ))}
                     </div>
                 </div>
@@ -84,7 +84,7 @@ const Users = () => {
              <h3>All Users</h3>
             <div className={styles.cardcon}>
             {users.map((user,k) => (
-                <Card key={k} name={user.name} email={user.email} gender={user.gender} DOB={user.DOB.slice(0,10)}/>
+                <Card key={k} image={user.image} name={user.name} email={user.email} gender={user.gender} DOB={user.DOB.slice(0,10)}/>
             ))}
             </div>            
         </div>

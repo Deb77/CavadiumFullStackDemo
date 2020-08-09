@@ -8,7 +8,8 @@ const userSchema = new Schema({
     email:{type:String,required:true},
     phone:{type:Number,required:true},
     DOB:{type:Date,required:true},
-    age:{type:Number,required:true}
+    age:{type:Number,required:true},
+    image:{type:String,required:true}
 },{
     timestamps:true
 });

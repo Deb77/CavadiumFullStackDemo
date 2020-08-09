@@ -8,7 +8,7 @@ const Card = (props) => {
             <p className={styles.email}>{props.email}</p>
             <hr className={styles.rule}/>
             <div className={styles.image}>
-                <img className={styles.avatar} src="https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593358_960_720.jpg" alt="wait"/>
+                <img className={styles.avatar} src={props.image} alt="wait"/>
                 <div>
                     <p>Gender: {props.gender}</p>
                     <p>DOB: {props.DOB}</p>
